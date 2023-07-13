@@ -1,0 +1,266 @@
+<!DOCTYPE html []>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="Kevin Jackman" content="html" />
+    <title>Requesting DEVELOPMENT MachONE server</title>
+    <style type="text/css">
+        /* Avoid page breaks inside the most common attributes, especially for exports (i.e. PDF) */
+
+        td,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        p,
+        ul,
+        ol,
+        li {
+            page-break-inside: avoid;
+        }
+
+        .variable {
+			font-family: "Courier New", "Courier", "monospace";
+			font-size: small;
+            font-style: italic;
+            font-weight: bolder;
+            text-decoration: underline;
+        }
+
+        code {
+            font-family: "Courier New", "Courier", "monospace";
+            color: black;
+            background-color: white;
+            border-width: medium;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+        }
+
+        label {
+            padding-left: 15px;
+            padding-right: 15px;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .input_fields {
+            display: flex;
+            justify-content: space-between;
+            width: 40%;
+
+        }
+
+        body {
+            border-style: double;
+            padding: 30px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <form>
+        <div class="input_fields">
+            <label for"newServer">MachONE Server: </label>
+            <input id="newServer" placeholder="MachONE Server" type="text">
+            <!-- <button onclick="getNewServer();" type="button">M1 Server</button> -->
+        </div>
+
+        <div class="input_fields">
+            <label for"oldProdServer">Legacy PROD Server: </label>
+            <input id="oldProdServer" placeholder="Legacy PROD Server" type="text">
+            <!-- <button onclick="getOldProdServerValue();" type="button">Legacy PROD Server</button> -->
+        </div>
+
+        <div class="input_fields">
+            <label for"plantID">Plant ID: </label>
+            <input id="plantID" placeholder="Plant ID" type="text">
+            <!-- <button onclick="getPlantIDValue();" type="button">Plant ID</button> -->
+        </div>
+
+        <div class="input_fields">
+            <label for"oldMesServer">Legacy MES Server: </label>
+            <input id="oldMesServer" placeholder="Legacy MES Server" type="text">
+            <!-- <button onclick="getOldMesServer();" type="button">Legacy MES Server</button> -->
+        </div>
+
+        <div class="input_fields">
+            <label for"oldDevServer">Legacy DEV Server: </label>
+            <input id="oldDevServer" placeholder="Legacy DEV Server" type="text">
+            <!-- <button onclick="getOldDevServer();" type="button">Legacy DEV Server</button> -->
+        </div>
+
+        <div class="input_fields">
+            <label for"plantName">Plant Name: </label>
+            <input id="plantName" placeholder="Plant Name" type="text">
+            <!-- <button onclick="getPlantName();" type="button">Plant Name</button> -->
+        </div>
+
+        <button onclick="getNewServer();
+                         getPlantIDValue();
+                         getOldDevServer();
+                         getOldMesServer();
+                         getOldProdServerValue();
+                         getPlantIDValue();
+                         getPlantName()" type="button" id="updateFields">Update All Fields</button>
+
+        <script>
+
+            function getNewServer() {
+                // Selecting the input element and get its value 
+                var inputVal = document.getElementById("newServer").value;
+                var elements = document.querySelectorAll('.newServer');
+                console.log(elements)
+                elements.forEach(element => {
+                    element.innerHTML = inputVal.toLowerCase();
+                });
+            }
+
+            function getOldProdServerValue() {
+                // Selecting the input element and get its value 
+                var inputVal = document.getElementById("oldProdServer").value;
+                var elements = document.querySelectorAll('.oldProdServer');
+                console.log(elements)
+                elements.forEach(element => {
+                    element.innerHTML = inputVal.toLowerCase();
+                });
+            }
+
+            function getPlantIDValue() {
+                // Selecting the input element and get its value 
+                var inputVal = document.getElementById("plantID").value;
+                var elements = document.querySelectorAll('.plantID');
+                console.log(elements)
+                elements.forEach(element => {
+                    element.innerHTML = inputVal;
+                });
+            }
+
+            function getOldMesServer() {
+                // Selecting the input element and get its value 
+                var inputVal = document.getElementById("oldMesServer").value;
+                var elements = document.querySelectorAll('.oldMesServer');
+                console.log(elements)
+                elements.forEach(element => {
+                    element.innerHTML = inputVal.toLowerCase();
+                });
+            }
+
+            function getOldDevServer() {
+                // Selecting the input element and get its value 
+                var inputVal = document.getElementById("oldDevServer").value;
+                var elements = document.querySelectorAll('.oldDevServer');
+                console.log(elements)
+                elements.forEach(element => {
+                    element.innerHTML = inputVal.toLowerCase();
+                });
+            }
+            function getPlantName() {
+                // Selecting the input element and get its value 
+                var inputVal = document.getElementById("plantName").value;
+                var elements = document.querySelectorAll('.plantName');
+                console.log(elements)
+                elements.forEach(element => {
+                    element.innerHTML = inputVal;
+                });
+            }
+        </script>
+    </form>
+    <h1>Requesting DEVELOPMENT MachONE server</h1>
+    <h2>Replace variables globally using fields and buttons above</h2>
+    <div>
+        <pre>
+#   Requirements for new Development Environment MAP Plant servers (draft)
+
++   USE Server name: <span class="newServer variable"> New Server</span> when building server.
++   Reference Server/plant: <span class="oldProdServer variable">Legacy PROD Server</span>/<span class="plantID variable">Plant ID</span>
++   Reference Server/plant for users: <span class="oldDevServer variable">Legacy DEV Server</span>/<span class="plantID variable">Plant ID</span>
++   Plant Name: <span class="plantName variable">Plant Name</span>
+    
+##  Physical
+-------------------------------------------------------------------------------
++   T-Shirt size: r5a.xlarge
++   Logical Volume Sizes
+    +   Development: <span class="newServer variable"> New Server</span>: 100 GB
+    +   db partition db02:  100 GB
+    +   dbbinlog:           100 GB
+    +   /dba:               16  GB
+    +   root:               100 GB
+    +   app01:              50  GB 
+    +   /app01/kiwi/ (Apps) 100 GB
++   Operating System:  RHEL8
++   Database: MariaDB (10.5) (MYSQL Profile)
++   Naming (use appropriate name for development environment being requested)
+    +   QA development server: <span class="newServer variable"> cl12725dbm01XXq</span> where XX is the next sequential unique number
+    +   DEV development server: <span class="newServer variable"> cl12725dbm01XXd</span> where XX is the next sequential unique number
+    +   TEST development server: <span class="newServer variable"> cl12725dbm01XXt</span> where XX is the next sequential unique number
+##  Other configuration
+-------------------------------------------------------------------------------
++   rsync all of /app01/ except (for dev use <span class="oldProdServer variable">Legacy PROD Server</span> as model)
+    +   exclude /app01/kiwi/site_xxxx for any numbered plants except required plant, /app01/kiwi/site_<span class="plantID variable">Plant ID</span>
+    +   exclude /app01/TSSmaps
+    +   exclude /app01/map_transfer
++   copy /etc/kiwiplan (for dev use <span class="oldProdServer variable">Legacy PROD Server</span> as model)
+    +   only copy for initial build
+    +   do not rsync for post initial syncs and/or final cutover sync
++   rsync home directories (for dev, use <span class="oldDevServer variable">Legacy DEV Server</span> as model)
+    +   all for plant named users based upon KiwiSec.data
+    +   /home/kiwijava
+    +   all for shopfloor based upon plant number or beginning with 9999
++   install/validate the following
+    +   java 11 (/usr/lib/jvm/jre-11)
+    +   mutt
+    +   control-m
+    +   /etc/profile.d/kiwijava.sh (referencing java 11)
++   mount
+    +   cl10740app001p:/app01/kiwi/maps as /app01/TSSmaps
+    +   Development: cl10740app001d:/app01/kiwi/interface as /app01/map_transfer
+    +   /KIWI symbolic link to /app01/kiwi
+    +   FSx share @ /app01/kiwi/interfaces
+
+## Kiwiplan requirements (environment team)
+-------------------------------------------------------------------------------
++   Server Security file (last triad of ipaddress + .SFL e.g. 160646.SFL)
+    +   entered in /etc/kiwiplan
+    +   copied to /etc/kiwiplan/security
++   license for Kiwiplan MES Software
+    +   copied as part of rsync
++   Create file structure within /app01/kiwiplan/interfaces for FSx interface
+    +   file structure will be created by script, <code>mk_FSx_dirs.sh</code>, by environment team   
+
+##  Database requirements
+-------------------------------------------------------------------------------
++   users
+    +   kpsql/kpsqlpw1
+    +   kiwisql/800486kiwi
+    +   kpsql_test/??
+    +   Kiwi ENV Admin
++   initial database for site_<span class="plantID variable">Plant ID</span> for plant copied from <span class="oldProdServer variable">Legacy PROD Server</span> to <span class="newServer variable"> New Server</span>
+    +   database will only exist if plant is in MySQL mode 
+    +   <span class="oldProdServer variable">Legacy PROD Server</span>/site_<span class="plantID variable">Plant ID</span>_prod brought over as site_<span class="plantID variable">Plant ID</span>
+    +   use prod database for dev (if in mysql)
++   initial databases for MES packages for plants
+    +   all databases from current MES server (<span class="oldMesServer variable">legacy MES server</span>) starting with plant <span class="plantID variable">Plant ID</span> copied to <span class="newServer variable"> New Server</span>
++   Add the following line in the [mysqld] section of my.cnf:    
+    +   sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"
+    +   table_definition_cache=259001
+    +   increase "max connections" to 2500
+    +   increate "table open cache" to 400
++   Enable "Hot Backup" functionality at initial database creation/load
+
+##  Logic Monitor (TBD)
+-------------------------------------------------------------------------------
++   create logic monitor references ??
+
+</body>
+
+</html>
